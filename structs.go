@@ -1,17 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
+
 	firstName := getUserData("Please enter your first name: ")
 	lastName := getUserData("Please enter your last name: ")
-	birthdate := getUserData("Please enter your birthday: ")
+	birthDate := getUserData("Please enter your birthday: ")
 
-	fmt.Println(firstName, lastName, birthdate)
+	appUser, err := newUser(firstName, lastName, birthDate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	appUser.OutputUserDetails()
+	appUser.clearUserName()
+	appUser.OutputUserDetails()
 }
 
 func getUserData(promptText string) (inputValue string) {
 	fmt.Print(promptText)
-	fmt.Scan(&inputValue)
+	fmt.Scanln(&inputValue)
 	return inputValue
 }
