@@ -1,4 +1,4 @@
-package main
+package user
 
 import (
 	"errors"
@@ -6,23 +6,23 @@ import (
 	"time"
 )
 
-type user struct {
+type User struct {
 	firstName string
 	lastName  string
 	birthDate string
 	createdAt time.Time
 }
 
-func (appUser user) OutputUserDetails() {
+func (appUser User) OutputUserDetails() {
 	fmt.Println(appUser.firstName, appUser.lastName, appUser.birthDate)
 }
 
-func (appUser *user) clearUserName() {
+func (appUser *User) ClearUserName() {
 	appUser.firstName = ""
 	appUser.lastName = ""
 }
 
-func newUser(firstName, lastName, birthDate string) (*user, error) {
+func NewUser(firstName, lastName, birthDate string) (*User, error) {
 	errMessage := ""
 	if firstName == "" {
 		errMessage += "First name was missing. "
@@ -40,7 +40,7 @@ func newUser(firstName, lastName, birthDate string) (*user, error) {
 		return nil, errors.New("First name, last name, and birth date are required. " + errMessage)
 	}
 
-	return &user{
+	return &User{
 		firstName: firstName,
 		lastName:  lastName,
 		birthDate: birthDate,

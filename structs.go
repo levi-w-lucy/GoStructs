@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"example.com/structs/user"
 )
 
 func main() {
@@ -10,7 +12,7 @@ func main() {
 	lastName := getUserData("Please enter your last name: ")
 	birthDate := getUserData("Please enter your birthday: ")
 
-	appUser, err := newUser(firstName, lastName, birthDate)
+	appUser, err := user.NewUser(firstName, lastName, birthDate)
 
 	if err != nil {
 		fmt.Println(err)
@@ -18,7 +20,7 @@ func main() {
 	}
 
 	appUser.OutputUserDetails()
-	appUser.clearUserName()
+	appUser.ClearUserName()
 	appUser.OutputUserDetails()
 }
 
