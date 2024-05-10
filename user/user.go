@@ -13,6 +13,12 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 func (appUser User) OutputUserDetails() {
 	fmt.Println(appUser.firstName, appUser.lastName, appUser.birthDate)
 }
@@ -22,7 +28,20 @@ func (appUser *User) ClearUserName() {
 	appUser.lastName = ""
 }
 
-func NewUser(firstName, lastName, birthDate string) (*User, error) {
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "Admin",
+			lastName:  "Admin",
+			birthDate: "--/--/----",
+			createdAt: time.Now(),
+		},
+	}
+}
+
+func New(firstName, lastName, birthDate string) (*User, error) {
 	errMessage := ""
 	if firstName == "" {
 		errMessage += "First name was missing. "
